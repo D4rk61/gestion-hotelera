@@ -12,13 +12,9 @@ import java.util.Optional;
 public interface IHotelCrudRepository extends JpaRepository<Hotel, Long> {
 
     Optional<Hotel> findByName(String name);
-
     // buscar por latitud y longitud
     Optional<Hotel> findByLatitudAndLongitud(BigDecimal latitud, BigDecimal longitud);
-
     Optional<Hotel> findByLatitudBetweenAndLongitudBetween(BigDecimal minLat, BigDecimal maxLat, BigDecimal minLon, BigDecimal maxLon);
-
-
     Optional<Hotel> findByCategoryId(Long id);
 
 }

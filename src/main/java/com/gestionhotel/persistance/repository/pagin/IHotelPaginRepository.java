@@ -1,6 +1,7 @@
 package com.gestionhotel.persistance.repository.pagin;
 
 import com.gestionhotel.persistance.entity.hotel.Hotel;
+import com.gestionhotel.persistance.entity.hotel.ServicesHotel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +9,6 @@ import org.springframework.data.repository.ListPagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Repository
 public interface IHotelPaginRepository extends ListPagingAndSortingRepository<Hotel, Long> {
@@ -24,4 +24,7 @@ public interface IHotelPaginRepository extends ListPagingAndSortingRepository<Ho
 
     Page<Hotel> findByEstrellas(Pageable pageable, Integer cantidadEstrellas);
 
+    // arrojar todos los servicios de un hotel
+    @Query("SELECT DISTINCT s FROM Hotel h JOIN h.services s WHERE h.id = ?1")
+    Page<ServicesHotel> findAllByServices(Pageable pageable, Long id);
 }

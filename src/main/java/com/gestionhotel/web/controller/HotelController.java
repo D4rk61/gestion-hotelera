@@ -2,7 +2,6 @@ package com.gestionhotel.web.controller;
 
 import com.gestionhotel.domain.service.HotelService;
 import com.gestionhotel.persistance.entity.hotel.Hotel;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +84,6 @@ public class HotelController {
     }
 
     @GetMapping("/findBydireccion")
-
     public ResponseEntity<Optional<Hotel>> findBydireccion(
             @RequestParam BigDecimal latitud,
             @RequestParam BigDecimal longitud) {
