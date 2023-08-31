@@ -1,27 +1,34 @@
 package com.gestionhotel.domain.service;
 
+import com.gestionhotel.domain.service.email.EmailServiceImpl;
 import com.gestionhotel.persistance.entity.hotel.Hotel;
 import com.gestionhotel.persistance.repository.crud.IHotelCrudRepository;
 import com.gestionhotel.persistance.repository.pagin.IHotelPaginRepository;
 import com.gestionhotel.util.exception.EmptyHotelListException;
 import com.gestionhotel.util.exception.HotelNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
 public class HotelService {
 
+    @Autowired
     private final IHotelCrudRepository hotelCrudRepository;
+    @Autowired
     private final IHotelPaginRepository hotelPaginRepository;
-
-    public HotelService(IHotelCrudRepository hotelCrudRepository, IHotelPaginRepository hotelPaginRepository) {
+    @Autowired
+    private final EmailServiceImpl emailService;
+    public HotelService(IHotelCrudRepository hotelCrudRepository, IHotelPaginRepository hotelPaginRepository, EmailServiceImpl emailService) {
         this.hotelCrudRepository = hotelCrudRepository;
         this.hotelPaginRepository = hotelPaginRepository;
+        this.emailService = emailService;
     }
 
     public Page<Hotel> findAll(int page, int size) {
@@ -100,4 +107,39 @@ public class HotelService {
     }
 
      */
+
+
+    // creacion de un nuevo hotel - area administrativa
+
+    public Hotel save(Hotel newHotel) {
+        try {
+            // validaciones hechas ya con @Validation
+
+            // guardar el hotel en una base de datos
+            Hotel savedHotel = this.hotelCrudRepository.save(newHotel);
+
+            // envio de email
+            String to = savedHotel.getEmail();
+            String subject = "Bienvenido a nuestro Sistema de Gestion de Hoteleria";
+
+            String body = "Estimado/a personal de " + savedHotel.getName() + ",\n\n" +
+                    "Le agradecemos por confiar en nosotros y registrarse en nuestro Sistema de Gestión de Hotelería. Aquí podrá mostrarse al mundo y ofrecer sus habitaciones, servicios y otros beneficios. Contamos con un amplio catálogo de usuarios de diferentes países de Latinoamérica, con sistema de geolocalización por Google Maps y sin ningún costo para usted.\n\n" +
+                    "Estos son los datos que hemos registrado de su hotel:\n\n" +
+                    "Nombre: " + savedHotel.getName() + "\n" +
+                    "Dirección: " + savedHotel.getDireccion() + "\n" +
+                    "Latitud: " + savedHotel.getLatitud() + "\n" +
+                    "Longitud: " + savedHotel.getLongitud() + "\n" +
+                    "Teléfono: " + savedHotel.getTelefono() + "\n" +
+                    "Esperamos que disfrute de nuestro sistema y que le sea útil para mejorar su negocio.\n\n" +
+                    "Saludos cordiales,\n" +
+                    "El equipo de Gestión Hotelera";
+
+            File file = new File("");       // ruta del archivo adjunto
+            emailService.sendEmailWithFile(to, subject, body, file);
+            return savedHotel;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

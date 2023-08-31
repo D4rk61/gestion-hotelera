@@ -19,6 +19,7 @@ public class HotelController {
     @Autowired
     private final HotelService hotelService;
 
+
     public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
     }
@@ -70,7 +71,6 @@ public class HotelController {
         }
     }
 
-
     @GetMapping("/listByEstrellas")
     public ResponseEntity<Page<Hotel>> findByEstrellas(
             @RequestParam Integer cantidadEstrellas,
@@ -93,6 +93,18 @@ public class HotelController {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+    // administracion general de hoteles - metodos CRUD
+
+    @PostMapping("/save")
+    public ResponseEntity<Hotel> save(@RequestBody Hotel hotel) {
+        try {
+            return ResponseEntity.ok(this.hotelService.save(hotel));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

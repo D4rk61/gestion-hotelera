@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,17 +25,21 @@ public class Hotel {
     @Column(name = "hotel_id", nullable = false)
     private Long id;
 
+    @Length(min = 2, max = 50)
     @Column(name = "hotel_name", nullable = false, length = 50)
     private String name;
 
+    @Length(min = 2, max = 400)
     @Column(name = "hotel_descripcion", nullable = false, length = 400)
     private String descripcion;
 
     @Column(name = "hotel_estrellas_numero", nullable = false)
-    private Integer estrellas;
+    private Integer estrellas = 3;
 
+    @Length(min = 2, max = 200)
     @Column(name = "hotel_direccion", nullable = false, length = 200)
     private String direccion;
+
 
     @Column(name = "hotel_latitud", nullable = false, length = 50)
     private BigDecimal latitud;
@@ -42,6 +47,7 @@ public class Hotel {
     @Column(name = "hotel_longitud", nullable = false, length = 50)
     private BigDecimal longitud;
 
+    @Length(min = 2, max = 50)
     @Column(name = "hotel_telefono", nullable = false, length = 50)
     private String telefono;
 
