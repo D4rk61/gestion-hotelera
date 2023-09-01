@@ -105,7 +105,6 @@ public class HotelService {
             throw new RuntimeException(e);
         }
     }
-
      */
 
 
@@ -134,9 +133,48 @@ public class HotelService {
                     "Saludos cordiales,\n" +
                     "El equipo de Gestión Hotelera";
 
-            File file = new File("");       // ruta del archivo adjunto
+            File file = new File("/home/blackshark/IdeaProjects/gestion-hotel/extras/Manual_de_uso.pdf");       // ruta del archivo adjunto
             emailService.sendEmailWithFile(to, subject, body, file);
             return savedHotel;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // crea el metodo update similar al de crear, con validaciones
+
+    public Hotel update(Long id, Hotel updateHotel) {
+
+        try {
+            if(this.hotelCrudRepository.existsById(id)) {
+                throw new HotelNotFoundException(id);
+            }
+
+            if(this.hotelCrudRepository.findById(id).isEmpty()) {
+                throw new HotelNotFoundException(id);
+            }
+
+            return this.hotelCrudRepository.save(updateHotel);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+    public void deleteById(Long id) {
+        try {
+            if(this.hotelCrudRepository.existsById(id)) {
+                throw new HotelNotFoundException(id);
+            }
+
+            if(this.hotelCrudRepository.findById(id).isEmpty()) {
+                throw new HotelNotFoundException(id);
+            }
+
+            this.hotelCrudRepository.deleteById(id);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

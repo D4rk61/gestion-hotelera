@@ -17,7 +17,7 @@ public class SwaggerConfig {
 
         return new OpenAPI()
             .info(new Info()
-                .title("Documentacion de Api Rest sistema de gestion hoteleria")
+                .title("Documentation - hotel management system")
                 .version("0.0.1")
                 .contact(new Contact()
                     .name("Dev. Jose Reynoso")

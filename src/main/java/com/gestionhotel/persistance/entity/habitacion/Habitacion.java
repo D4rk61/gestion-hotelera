@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,11 +24,13 @@ public class Habitacion {
     @Column(name = "habitacion_id", nullable = false)
     private Long habitacionId;
 
+    @Length(min = 2, max = 50)
     @Column(name = "numero", nullable = false, length = 50)
     private String numero;
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
+
 
     @Column(name = "capacidad", nullable = false, length = 50)
     private String capacidad;
@@ -35,7 +38,7 @@ public class Habitacion {
     @NotNull
     private BigDecimal precio;
     @NotNull
-    private boolean disponible;
+    private boolean disponible = true;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
@@ -43,4 +46,5 @@ public class Habitacion {
 
     @ManyToMany(mappedBy = "habitaciones")
     private List<Reserva> reservas;
+
 }

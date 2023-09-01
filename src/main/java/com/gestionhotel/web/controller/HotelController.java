@@ -18,8 +18,6 @@ public class HotelController {
 
     @Autowired
     private final HotelService hotelService;
-
-
     public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
     }
@@ -92,7 +90,6 @@ public class HotelController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
@@ -107,5 +104,23 @@ public class HotelController {
         }
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Hotel> update(@PathVariable Long id, @RequestBody Hotel hotel) {
+        try {
+            return ResponseEntity.ok(this.hotelService.update(id, hotel));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        try {
+            this.hotelService.deleteById(id);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

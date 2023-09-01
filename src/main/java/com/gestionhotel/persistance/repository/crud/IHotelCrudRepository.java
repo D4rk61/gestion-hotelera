@@ -17,4 +17,5 @@ public interface IHotelCrudRepository extends JpaRepository<Hotel, Long> {
     Optional<Hotel> findByLatitudBetweenAndLongitudBetween(BigDecimal minLat, BigDecimal maxLat, BigDecimal minLon, BigDecimal maxLon);
     Optional<Hotel> findByCategoryId(Long id);
 
+
 }

@@ -1,5 +1,6 @@
 package com.gestionhotel.web.controller;
 
+import com.gestionhotel.domain.service.HotelExtrasService;
 import com.gestionhotel.domain.service.ServicesHotelService;
 import com.gestionhotel.persistance.entity.hotel.ServicesHotel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,31 @@ public class ServicesHotelController {
 
     @Autowired
     private final ServicesHotelService servicesHotelService;
-
-    public ServicesHotelController(ServicesHotelService servicesHotelService) {
+    @Autowired
+    private final HotelExtrasService  hotelExtrasService;
+    public ServicesHotelController(ServicesHotelService servicesHotelService, HotelExtrasService hotelExtrasService) {
         this.servicesHotelService = servicesHotelService;
+        this.hotelExtrasService = hotelExtrasService;
+    }
+
+    @GetMapping("/listAllServices")
+    public ResponseEntity<Page<ServicesHotel>> getAll(
+            @RequestParam(defaultValue = Page_NUMBER) int page,
+            @RequestParam(defaultValue = Page_SIZE) int size) {
+
+        return ResponseEntity.ok(this.hotelExtrasService.getAll(page, size));
+    }
+
+    @GetMapping("/listAllCategories")
+    public ResponseEntity<?> findAll(
+            @RequestParam(defaultValue = Page_NUMBER) int page,
+            @RequestParam(defaultValue = Page_SIZE) int size) {
+
+        try {
+            return ResponseEntity.ok(this.hotelExtrasService.getAllCategory(page, size));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/listAllBy/{id}")
