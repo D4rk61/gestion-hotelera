@@ -22,7 +22,7 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping("/list")
+    @GetMapping("/listAll")
     public ResponseEntity<Page<Hotel>> findAll(
             @RequestParam(defaultValue = Page_NUMBER) int page,
             @RequestParam(defaultValue = Page_SIZE) int size

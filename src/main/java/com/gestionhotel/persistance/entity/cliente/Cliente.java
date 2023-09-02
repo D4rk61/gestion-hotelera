@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Table(name = "cliente")
 public class Cliente {
     @Id
+    @Length(min = 9, max = 9)
     @Column(name = "cliente_dni", nullable = false, length = 9)
     private String dni;
 

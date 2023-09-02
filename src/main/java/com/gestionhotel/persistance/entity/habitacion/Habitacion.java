@@ -1,5 +1,6 @@
 package com.gestionhotel.persistance.entity.habitacion;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gestionhotel.persistance.entity.hotel.Hotel;
 import com.gestionhotel.persistance.entity.reserva.Reserva;
 import jakarta.persistence.*;
@@ -36,12 +37,13 @@ public class Habitacion {
     private String capacidad;
 
     @NotNull
-    private BigDecimal precio;
+    private Float precio;
     @NotNull
     private boolean disponible = true;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
+    @JsonBackReference
     private Hotel hotel;
 
     @ManyToMany(mappedBy = "habitaciones")

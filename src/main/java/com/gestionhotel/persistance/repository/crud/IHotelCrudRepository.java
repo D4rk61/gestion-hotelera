@@ -18,4 +18,10 @@ public interface IHotelCrudRepository extends JpaRepository<Hotel, Long> {
     Optional<Hotel> findByCategoryId(Long id);
 
 
+    // metodos para reserva
+
+    String findByNameIgnoreCase(String name);
+    String findByTelefono(String telefono);
+
+
 }

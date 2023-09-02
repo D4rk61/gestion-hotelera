@@ -1,47 +1,36 @@
--- crear la database en postgreSQL
-create DATABASE gestion_hotelera;
+-- Insertar 10 hoteles falsos
+INSERT INTO hotel (hotel_descripcion, hotel_direccion, hotel_email, hotel_estrellas_numero, hotel_latitud, hotel_longitud, hotel_name, hotel_telefono, category_id) VALUES
+('Un hotel boutique con encanto en el centro de la ciudad. Disfrute de nuestras habitaciones elegantes y confortables, nuestro spa y nuestro restaurante gourmet.', 'Calle Mayor 12, Madrid', 'info@hotelmadrid.com', 4, 40.416775, -3.703790, 'Hotel Madrid', '915555555', 1),
+('Un resort de lujo frente al mar. Disfrute de nuestras piscinas, nuestro campo de golf, nuestro casino y nuestra animación nocturna.', 'Avenida del Sol 34, Cancún', 'info@resortcancun.com', 5, 21.161908, -86.851528, 'Resort Cancún', '998888888', 2),
+('Un hotel de negocios con todas las comodidades. Disfrute de nuestras salas de reuniones, nuestro gimnasio, nuestro servicio de habitaciones y nuestra conexión a internet.', 'Avenida Paulista 1234, São Paulo', 'info@hotelbusiness.com', 3, -23.550520, -46.633309, 'Hotel Business', '1133333333', 3),
+('Un motel económico y acogedor. Disfrute de nuestras habitaciones limpias y sencillas, nuestro parking gratuito y nuestro desayuno continental.', 'Route 66 5678, Flagstaff', 'info@motelroute66.com', 2, 35.198284, -111.651299, 'Motel Route 66', '9287777777', 4),
+('Un hotel estándar con una buena relación calidad-precio. Disfrute de nuestras habitaciones amplias y luminosas, nuestro servicio de lavandería y nuestro bar.', 'Rue de la Paix 9, París', 'info@hotelparis.com', 3, 48.856614, 2.352222, 'Hotel París', '0144444444', 5),
+('Un hotel histórico y elegante en el corazón de Roma. Disfrute de nuestras habitaciones decoradas con antigüedades, nuestro jardín y nuestra terraza con vistas al Coliseo.', 'Via dei Fori Imperiali 45, Roma', 'info@hotelroma.com', 4, 41.902782, 12.496366 , 'Hotel Roma', '0666666666', 1),
+('Un resort familiar y divertido en Orlando. Disfrute de nuestras suites temáticas, nuestro parque acuático, nuestro cine y nuestro transporte gratuito a los parques de atracciones.', 'International Drive 6789 , Orlando', 'info@resortorlando.com', 4 ,28.538336 , -81.379234 , 'Resort Orlando' , '4075555555' ,2),
+('Un hotel moderno y funcional en Tokio. Disfrute de nuestras habitaciones con tecnología de última generación , nuestro sushi bar , nuestro centro de negocios y nuestra ubicación céntrica.' , 'Shinjuku-ku , Nishishinjuku , Tokyo' , 'info@hoteltokyo.com' ,3 ,35.689487 ,139.691711 , 'Hotel Tokyo' ,'0333333333' ,3),
+('Un motel rústico y acogedor en el campo . Disfrute de nuestras habitaciones con chimenea , nuestro restaurante casero , nuestro establo y nuestra granja .' , 'Carretera Nacional km .1234 , Córdoba' ,'info@motelcampo.com' ,2 ,-31.420083 ,-64.188776 , 'Motel Campo' ,'03515555555' ,4),
+('Un hotel ecológico y sostenible en Costa Rica . Disfrute de nuestras habitaciones con materiales naturales , nuestro spa , nuestro restaurante vegetariano y nuestra reserva natural .' , 'Carretera a Monteverde , Puntarenas' ,'info@hoteleco.com' ,3 ,10.275283 ,-84.825510 , 'Hotel Eco' ,'26455555' ,5);
 
--- categotias de hoteles
-INSERT INTO public.category_hotel(
-	category_id, category_name)
-	VALUES (1, 'Boutique'),
-	(2, 'Resort'),
-	(3, 'Business'),
-	(4, 'Motel'),
-	(5, 'Standard');
-
--- servicios de hoteles
-
-INSERT INTO public.services_hotel(services_id, services_hotel_name)
-VALUES
-(1, 'WiFi'),
-(2, 'Estacionamiento'),
-(3, 'Piscina'),
-(4, 'Spa'),
-(5, 'Restaurante'),
-(6, 'Gimnasio'),
-(7, 'Servicio de Habitaciones'),
-(8, 'Servicio de Lavandería'),
-(9, 'Transporte al Aeropuerto'),
-(10, 'Recepción 24 Horas'),
-(11, 'Servicio de Conserjería'),
-(12, 'Sala de Reuniones'),
-(13, 'Centro de Negocios'),
-(14, 'Servicio de Alquiler de Autos'),
-(15, 'Servicio de Cuidado de Niños'),
-(16, 'Servicio de Limpieza Diaria'),
-(17, 'Bar y Lounge'),
-(18, 'Jacuzzi'),
-(19, 'Sauna'),
-(20, 'Servicio de Despertador'),
-(21, 'Servicio de Mascotas'),
-(22, 'Servicio de Alojamiento para Mascotas'),
-(23, 'Servicio de Alquiler de Bicicletas'),
-(24, 'Servicio de Traslado'),
-(25, 'Servicio de Valet'),
-(26, 'Servicio de Peluquería'),
-(27, 'Servicio de Caja de Seguridad'),
-(28, 'Actividades Recreativas'),
-(29, 'Servicio de Información Turística'),
-(30, 'Servicio de Entradas para Espectáculos');
+gestion_hotelera=# -- Insertar 20 habitaciones falsas asociadas a los hoteles
+INSERT INTO habitacion (capacidad, disponible, numero, precio, tipo, hotel_id) VALUES
+(2, true, 101, 100, 'Doble', 12),
+(2, true, 102, 120, 'Doble superior', 10),
+(4, true, 103, 150, 'Familiar', 11),
+(2, false, 104, 100, 'Doble', 9),
+(2, true, 201, 200, 'Suite', 12),
+(2, true, 202, 180, 'Doble deluxe', 8),
+(4, true, 203, 220, 'Familiar deluxe', 10),
+(6, true, 204, 300, 'Presidencial', 11),
+(1, true, 301, 80, 'Individual', 3),
+(2, true, 302, 100, 'Doble', 3),
+(4, false, 303, 150, 'Familiar', 3),
+(2, true, 304 ,120 , 'Doble ejecutiva' ,3),
+(2 ,true ,401 ,50 ,'Doble' ,4),
+(4 ,true ,402 ,70 ,'Familiar' ,4),
+(2 ,false ,403 ,50 ,'Doble' ,4),
+(2 ,true ,404 ,60 ,'Doble con jacuzzi' ,4),
+(2 ,true ,501 ,120 ,'Doble' ,5),
+(3 ,true ,502 ,150 ,'Triple' ,5),
+(4 ,true ,503 ,180 ,'Cuádruple' ,5),
+(2 ,false ,504 ,120 ,'Doble' ,5);
 

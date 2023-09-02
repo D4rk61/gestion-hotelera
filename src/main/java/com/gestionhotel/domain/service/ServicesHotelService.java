@@ -5,6 +5,7 @@ import com.gestionhotel.persistance.entity.hotel.ServicesHotel;
 import com.gestionhotel.persistance.repository.crud.IHotelCrudRepository;
 import com.gestionhotel.persistance.repository.crud.IServicesHotelCrudRepository;
 import com.gestionhotel.persistance.repository.pagin.IHotelPaginRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+@Service    @Transactional
 public class ServicesHotelService {
 
     @Autowired

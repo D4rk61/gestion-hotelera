@@ -1,0 +1,32 @@
+
+// crear un usuario => http://localhost:8080/api/cliente/create
+{
+  "dni": "123456789",
+  "nombre": "Jose",
+  "apellido": "Reynoso",
+  "telefono": "1234567890",
+  "email": "reynosojose2005@gmail.com",
+  "username": "blackshark",
+  "password": "1234",
+  "roles": ["USER"]
+}
+
+;
+// crear una reserva =>
+
+{
+  "fechaSalida": "2023-09-15T12:00:00",
+  "numeroPersonas": 2,
+  "estado": "CONFIRMADA",
+  "cliente": {
+    "dni": "123456789"
+  },
+  "habitaciones": [
+    {
+      "habitacionId": 21
+    },
+    {
+      "habitacionId": 22
+    }
+  ]
+}

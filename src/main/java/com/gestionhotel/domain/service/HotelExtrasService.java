@@ -6,13 +6,14 @@ import com.gestionhotel.persistance.repository.crud.ICategoryHotelCrudRepository
 import com.gestionhotel.persistance.repository.crud.IServicesHotelCrudRepository;
 import com.gestionhotel.persistance.repository.pagin.ICategoryHotelPaginRepository;
 import com.gestionhotel.persistance.repository.pagin.IServicesHotelPaginRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service    @Transactional
 public class HotelExtrasService {
 
     // servicios de hoteles

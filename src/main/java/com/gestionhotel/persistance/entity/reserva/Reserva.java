@@ -23,7 +23,7 @@ public class Reserva {
     private Long id;
 
     @Column(name = "fecha_entrada", nullable = false)
-    private LocalDateTime fechaEntrada;
+    private LocalDateTime fechaEntrada = LocalDateTime.now();
 
     @Column(name = "fecha_salida", nullable = false)
     private LocalDateTime fechaSalida;
@@ -35,9 +35,11 @@ public class Reserva {
     private EstadosReserva estado;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "cliente_dni")
     private Cliente cliente;
+
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
